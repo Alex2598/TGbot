@@ -348,16 +348,7 @@ namespace TelegramBotExperiments
                 }
             }
 
-            //if (currentTime >= targetTime2 && currentTime < targetTime2.Add(new TimeSpan(0, 1, 0))) // проверка времени для второго уведомления
-            //{
-            //    foreach (var chatId in chatIds)
-            //    {
-            //        //await bot.SendTextMessageAsync(chatId, "Заказ обедов завершен");
-
-            //        Environment.Exit(0);
-            //    }
-               
-            //}
+           
         }
     }
 }
