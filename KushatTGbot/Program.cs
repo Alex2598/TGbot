@@ -12,14 +12,12 @@ using Telegram.Bot.Args;
 
 namespace TelegramBotExperiments
 {
-    class Program
+    public class Program
     {
-        public static List<string> selectedSalads = new List<string>();
-        public static List<string> selectedMainDishes = new List<string>();
-        public static List<string> selectedHotDishes = new List<string>();
-        static ITelegramBotClient bot = new TelegramBotClient("5851097204:AAGAwwzbpojD82XLW0z4rA2JBbaukweg_vE");
+        static ITelegramBotClient bot = new TelegramBotClient("***");
         static Dictionary<long, int> userStep = new Dictionary<long, int>();
         static List<long> chatIds = new List<long>();
+        public static string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3, drink1, drink2, drink3;
         static void Main(string[] args)
         {
             Console.WriteLine("Запущен бот " + bot.GetMeAsync().Result.FirstName);
@@ -38,7 +36,7 @@ namespace TelegramBotExperiments
            
             var timer = new System.Timers.Timer();
             timer.Elapsed += TimerElapsed;
-            timer.Interval = 6000; // интервал в миллисекундах (1 минута)
+            timer.Interval = 6000; // интервал 
             timer.Start();
             Console.ReadLine();
            
@@ -59,19 +57,16 @@ namespace TelegramBotExperiments
                 }
                 if (message == null || message.Type != MessageType.Text)
                     return;
-                else if (!await IsUserInChannelAsync(chatId, "-1001959615737"))
+                else if (!await IsUserInChannelAsync(chatId, "***"))
                 {
                     await bot.SendTextMessageAsync(chatId, "Вы не состоите в нужном канале.");
                     return;
                 }
                 else if (message.Text.ToLower() == "/start")
                 {
-                    
                     await using Stream stream = System.IO.File.OpenRead("IMG_0092-H.jpg");
                     await botClient.SendPhotoAsync(chatId: chatId, photo: InputFile.FromStream(stream: stream, fileName: "IMG_0092-H.jpg"));
-                    // Отправить сообщение с кнопками выбора
                     await botClient.SendTextMessageAsync(message.Chat, "Выберите место:", replyMarkup: GetInlineKeyboard(Inlines.PlaceMenuOptions()));
-
                     userStep[message.Chat.Id] = 1;
                     return;
                 }
@@ -91,7 +86,6 @@ namespace TelegramBotExperiments
                         {
                             case "Кир&Пич":
                                 userStep[chatId] = 2;
-                                
                                 await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, "Выберите категорию:", replyMarkup: GetInlineKeyboard(Inlines.PreviosCategoryMenuOptions()));
                                 break;
                             case "Другое место":
@@ -139,7 +133,7 @@ namespace TelegramBotExperiments
                     }
                     else if (currentStep == 3)
                     {
-                        string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3,drink1,drink2,drink3;
+                        //string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3,drink1,drink2,drink3;
                         var selectedCategoryDish = callbackQuery.Data;
                         switch (selectedCategoryDish)
                         {
@@ -153,12 +147,10 @@ namespace TelegramBotExperiments
                                 break;
                             case "Горячее":
                                 userStep[chatId] = 4;
-
                                 await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, "Выберите горячее:", replyMarkup: GetInlineKeyboard(DatabasesMenu.HotDishMenuOptions(out hotdish1, out hotdish2, out hotdish3)));
                                 break;
                             case "Напиток":
                                 userStep[chatId] = 4;
-
                                 await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, "Выберите Напиток:", replyMarkup: GetInlineKeyboard(DatabasesMenu.DrinkMenuOptions(out drink1, out drink2, out drink3)));
                                 break;
                             case "Назад":
@@ -172,11 +164,11 @@ namespace TelegramBotExperiments
                     }
                     else if (currentStep == 4)
                     {
-                        string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3, drink1 ,drink2, drink3 ;
-                        DatabasesMenu.SaladMenuOptions(out salad1, out salad2, out salad3);
-                        DatabasesMenu.MainDishMenuOptions(out maindish1, out maindish2);
-                        DatabasesMenu.HotDishMenuOptions(out hotdish1, out hotdish2, out hotdish3);
-                        DatabasesMenu.DrinkMenuOptions(out drink1, out drink2, out drink3);
+                        //string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3, drink1 ,drink2, drink3 ;
+                        //DatabasesMenu.SaladMenuOptions(out salad1, out salad2, out salad3);
+                        //DatabasesMenu.MainDishMenuOptions(out maindish1, out maindish2);
+                       // DatabasesMenu.HotDishMenuOptions(out hotdish1, out hotdish2, out hotdish3);
+                       // DatabasesMenu.DrinkMenuOptions(out drink1, out drink2, out drink3);
                         var selectedDish = callbackQuery.Data;
                         var user = await botClient.GetChatMemberAsync(chatId, callbackQuery.From.Id);
                         var userFirstName = user.User.FirstName;
@@ -230,7 +222,7 @@ namespace TelegramBotExperiments
                     }
                     else if (currentStep == 5)
                     {
-                        string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3;
+                        //string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3;
                         var selectedCategoryDish = callbackQuery.Data;
                         switch (selectedCategoryDish)
                         {
@@ -258,10 +250,10 @@ namespace TelegramBotExperiments
                     }
                     else if (currentStep == 6)
                     {
-                        string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3;
-                        DatabasesMenu.SaladMenuOptions(out salad1, out salad2, out salad3);
-                        DatabasesMenu.MainDishMenuOptions(out maindish1, out maindish2);
-                        DatabasesMenu.HotDishMenuOptions(out hotdish1, out hotdish2, out hotdish3);
+                        //string salad1, salad2, salad3, maindish1, maindish2, hotdish1, hotdish2, hotdish3;
+                       // DatabasesMenu.SaladMenuOptions(out salad1, out salad2, out salad3);
+                       // DatabasesMenu.MainDishMenuOptions(out maindish1, out maindish2);
+                       // DatabasesMenu.HotDishMenuOptions(out hotdish1, out hotdish2, out hotdish3);
                         var selectedDish = callbackQuery.Data;
                         var user = await botClient.GetChatMemberAsync(chatId, callbackQuery.From.Id);
                         var userFirstName = user.User.FirstName;
