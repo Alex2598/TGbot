@@ -103,7 +103,7 @@ namespace TelegramBotExperiments
                         if (!string.IsNullOrEmpty(salads) && !string.IsNullOrEmpty(hotDishes) && !string.IsNullOrEmpty(mainDishes))
                         {
                             DeleteSelectedDishes(userId);
-                            //bot.SendTextMessageAsync(userId, "");
+                           
                              bot.SendTextMessageAsync(userId, "Вы выбрали обед из двух, а заказали три. Заказ сбросился! Все ваши выбранные блюда удалены! Перезаказывайте", replyMarkup: Program.GetInlineKeyboard(Inlines.RestartMenuOptions()));
                         }
                        

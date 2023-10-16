@@ -11,42 +11,6 @@ namespace TelegramBotExperiments
     public class DatabasesMenu
     {
 
-        //public static void SaveSelectedDishesToExcel(List<string> selectedSalads, List<string> selectedMainDishes, List<string> selectedHotDishes)
-        //{
-        //    string filePath = "Database\\database.xlsx";
-        //    FileInfo file = new FileInfo(filePath);
-        //    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-        //    // Создание нового Excel пакета
-        //    using (ExcelPackage package = new ExcelPackage(file))
-        //    {
-                
-        //        ExcelWorksheet worksheet = package.Workbook.Worksheets["Заказанные блюда"] ?? package.Workbook.Worksheets.Add("Заказанные блюда");
-        //        if (worksheet == null)
-        //        {
-        //            worksheet = package.Workbook.Worksheets.Add("Заказанные блюда");
-        //        }
-
-
-        //        foreach (string salad in selectedSalads)
-        //        {
-        //            int rowCount = worksheet.Dimension.Rows + 1;
-        //            worksheet.Cells[rowCount, 1].Value = chatId;
-        //            worksheet.Cells[rowCount, 2].Value = salad;
-        //            worksheet.Cells[1, 1].Value = salad;
-        //        }
-
-        //        foreach (string Hot in selectedMainDishes)
-        //        {
-        //            worksheet.Cells[2, 1].Value = Hot;
-        //        }
-        //        foreach (string genetal in selectedHotDishes)
-        //        {
-        //            worksheet.Cells[3, 1].Value = genetal;
-        //        }
-        //        // Сохранение изменений в Excel файле
-        //        package.Save();
-        //    }
-        //}
         public static List<string> SaladMenuOptions(out string salad1, out string salad2, out string salad3)
         {
             List<string> optionssalads = new List<string>();
